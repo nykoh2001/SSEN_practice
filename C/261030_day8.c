@@ -282,6 +282,9 @@ void init_student(student* p, int n) {
 	//	scanf("%s", temp->prof.name);
 	//}
 
+	/*
+	* 여기선 profile alias 못하나?
+	*/
 	for (int i = 0; i < n; ++i) {
 		scanf("%d %lf %d", &p[i].num, &p[i].grade, &p[i].prof.age);
 		char (*arr)[10] = (char(*)[10])calloc(3, sizeof(char[10]));
@@ -305,13 +308,16 @@ void print_student(student* p, int n) {
 }
 
 void free_mem3(student* p, int n) {
+	profile* prof = NULL;
 	if (p == NULL) return;
 	for (int i = 0; i < n; i++) {
-		free(p[i].prof.color[0]); // free(p[i].prof.color): 에러. 왜 안되는지 확인
+		prof = &p[i].prof;
+		free(prof->color[0]); // free(p[i].prof.color): 에러. 왜 안되는지 확인
 		
-		p[i].prof.color[0] = 0;
-		p[i].prof.color[1] = 0;
-		p[i].prof.color[2] = 0;
+		// memset(prof->color[0], 0, 12);
+		prof->color[0] = 0;
+		prof->color[1] = 0;
+		prof->color[2] = 0;
 	}
 }
 
