@@ -207,15 +207,35 @@ int main(void) {
 #if 1
 
 int main(void) {
-	int* arr = (int*)malloc(sizeof(int) * 10);
-	if (arr != 0)
-		return 12;
-	print_data(arr, SIZE(arr)); // 불가
+	int n = 10;
+	int* arr = NULL;
+	//arr = (int*)malloc(sizeof(int) * n);
+	//arr = (int*)calloc(n, sizeof(int)); : 초기화 해줌
+	arr = (int*)realloc(NULL, 3 * sizeof(int));
+
+	if (arr == NULL) return 12;
+
+	//arr[3] = 1000; // Runtime error
+
+	int* temp = (int*)realloc(arr, n * sizeof(int));
+	if (temp == NULL) return 12; // 메모리 부족
+	if (temp != arr) arr = temp; // 기존 arr 영역에 추가 할당할 공간이 부족해서 새로운 곳에 다시 할당
+	arr[3] = 1000;
+
+	print_data(arr, n); // 쓰레기값 출력
+	free(arr);
+	//free(arr); - Runtime Error
+
+	printf("%p\n", arr); // 주소 값 자체는 그대로 유지
+
+	arr = NULL;
+	free(arr); // 정상 동작, NULL인 경우 아무것도 하지 않고 return하도록 구현되어 있음
 
 	return 0;
 }
 
 #endif
+
 
 
 /*
