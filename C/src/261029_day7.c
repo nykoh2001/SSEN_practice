@@ -239,14 +239,14 @@ int main(void) {
 
 
 /*
-* 선택 과제:
+* TODO:
 * 화면에 선택지 출력 (1. sum, 2. sub, 3. ... 0. exit)
 * 선택지 숫자를 입력 받아 실행 반복
 */
 #if 0
 
 int main(void) {
-	_function_t func_p[] = { { sum, "sum" },{ sub, "sub" },{ mul, "mul" },{ divi, "div" },{ mod, "mod" } };
+	_function_t func_p[] = { { ssum, "sum" },{ sub, "sub" },{ mul, "mul" },{ divi, "div" },{ mod, "mod" } };
 
 
 	return 0;
