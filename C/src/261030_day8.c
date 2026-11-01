@@ -2,7 +2,9 @@
 #include "day7_lib.h"
 
 #include <stdlib.h>
-//
+
+#if 0
+
 void free_mem(void** p) {
 	if (p == NULL) return;
 	free(*p);
@@ -50,6 +52,7 @@ struct student {
 
 typedef struct student student_t;
 
+#endif
 
 #if 0
 
@@ -163,26 +166,47 @@ int main(void) {
 * => TODO: 구현 해보기
 */
 
-#if 0
+#if 1
 
 int main(void) {
 	int n;
-	char** str_arr = NULL;
 
 	freopen("data.txt", "r", stdin);
 	scanf("%d", &n);
 
-	char** parr = NULL;
-	parr = (char**)malloc(1000);
-	
-	if (parr == NULL) return 12;
+	char** str_arr = (char**)malloc(sizeof(char) * 1000);
+	if (str_arr == NULL) return 12;
 
-	parr[0] = parr + n;
-	printf("%p %p\n", parr, parr[0]);
-	
-	for (int i = 0; i < n; i++) {
+	char* curr_pointer = (char*)str_arr + sizeof(char*) * n;
+	char str[101];
+	for (int i = 0; i < n; ++i) {
+		scanf("%100s", str);
+		str_arr[i] = curr_pointer;
 
+		int length = strlen(str) + 1;
+		strcpy(curr_pointer, str);
+		curr_pointer += length;
 	}
+
+	printf("Before realloc: %p, (size: %d)\n", str_arr, 1000 * sizeof(char));
+	for (int i = 0; i < n; ++i)
+		printf("%p: %s\n", str_arr[i], str_arr[i]);
+
+	int used_size = curr_pointer - (char*)str_arr;
+	char** temp = (char**)realloc(str_arr, used_size);
+	if (temp == NULL) {
+		free(str_arr);
+		return 12;
+	}
+	str_arr = temp;
+	printf("After realloc: %p, (size: %d)\n", str_arr, used_size);
+
+	char** str_ptr = str_arr;
+	for (int i = 0; i < n; ++i) {
+		printf("%p: %s\n", str_ptr[i], str_ptr[i]);
+	}
+
+	free(str_arr);
 
 	return 0;
 }
@@ -250,7 +274,7 @@ int main(void) {
 #endif
 
 // 포인터 멤버 배열에 동적 메모리 할당 받기
-#if 1
+#if 0
 
 typedef struct _profile {
 	int age;
