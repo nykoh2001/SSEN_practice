@@ -1,4 +1,5 @@
 #include "day7_lib.h"
+#include "day3_lib.h"
 
 int sum(int a, int b) {
 	return a + b;
