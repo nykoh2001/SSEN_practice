@@ -242,6 +242,9 @@ int main(void) {
 * TODO:
 * 화면에 선택지 출력 (1. sum, 2. sub, 3. ... 0. exit)
 * 선택지 숫자를 입력 받아 실행 반복
+* 
+* +)
+* Enum, switch-case로 구현
 */
 #if 0
 
