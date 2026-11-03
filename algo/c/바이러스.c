@@ -69,19 +69,16 @@ int virus_BFS1(int start) {
 	enqueue(start);
 	visited[start] = 1;
 
-	int connected_count = 0;
-
 	while (front < rear) {
 		int curr_node = dequeue();
 		for (int i = 1; i < N; i++) {
 			if (adj_matrix[curr_node][i] && !visited[i]) {
 				enqueue(i);
 				visited[i] = 1;
-				connected_count++;
 			}
 		}
 	}
-	return connected_count;
+	return rear - 1;
 }
 
 int virus_BFS2(int start) {
@@ -90,8 +87,6 @@ int virus_BFS2(int start) {
 
 	enqueue(start);
 	visited[start] = 1;
-
-	int connected_count = 0;
 
 	while (front < rear) {
 		int curr_node = dequeue();
@@ -102,11 +97,10 @@ int virus_BFS2(int start) {
 			if ((next_node = adj_list[curr_node][i]) && !visited[next_node]) {
 				enqueue(next_node);
 				visited[next_node] = 1;
-				connected_count++;
 			}
 		}
 	}
-	return connected_count;
+	return rear - 1;
 }
 
 int main(void) {
