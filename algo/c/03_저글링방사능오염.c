@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -67,17 +67,16 @@ void print_data() {
 }
 
 result BFS() {
-	int duration = 3, dead_juggling = 0; // Edge 1: duration을 0으로 설정한 경우 소요 시간이 한 번도 갱신되지 않았을 때에 3이 아닌 0 반환
+	coordinate curr;
 
 	coordinate move[4] = { (coordinate) { 1,0 }, (coordinate) { 0, 1 }, (coordinate) { -1,0 }, (coordinate) { 0, -1 } };
 	front = rear = 0;
 
 	Queue[rear++] = (coordinate){ start_x, start_y };
 	graph[start_y][start_x] = 3;
-	dead_juggling++;
 
 	while (front < rear) {
-		coordinate curr = Queue[front++];
+		curr = Queue[front++];
 
 		for (int move_idx = 0; move_idx < MOVE_SIZE; move_idx++) {
 			int new_x = curr.x + move[move_idx].x;
@@ -89,15 +88,15 @@ result BFS() {
 
 			Queue[rear++] = (coordinate){ new_x, new_y };
 			graph[new_y][new_x] = graph[curr.y][curr.x] + 1;
-			duration = duration < graph[new_y][new_x] ? graph[new_y][new_x] : duration;
-			dead_juggling++;
 		}
 	}
-	return (result) { duration, dead_juggling };
+	// NOTE: curr이 큐에 마지막까지 남아있는 좌표 - 가장 큰 값을 갖는 좌표
+	return (result) { graph[curr.y][curr.x], rear };
 }
 
 int main(void) {
-	//freopen("03_data.txt", "r", stdin);
+	// 함수 인자는 뒤에서부터 push (stdin -> r -> "~~")
+	freopen("03_data.txt", "r", stdin);
 
 	int total_juggling = input_data();
 	//print_data();
@@ -105,6 +104,9 @@ int main(void) {
 
 	//print_data();
 
+	// NOTE: !!!!!!!! 전역 변수인count가 이미 printf 호출 stack 블록에 복사되어 들어간 상태에서 BFS 함수 안에서 count를 변경해도 printf 블록의 count에 반영되지 않음
+	//printf("%d\n%d\n", BFS(), count);
+	
 	printf("%d\n", r.duration);
 	printf("%d", total_juggling - r.dead_juggling);
 
