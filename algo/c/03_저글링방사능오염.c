@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_X_Y 101
+#define MAX_X_Y 102 // 102로 설정, 2칸 여유있게 설정해서 테우리 값은 0으로 남겨두기
 #define MAX_N (MAX_X_Y * MAX_X_Y)
 #define MOVE_SIZE 4
 
@@ -35,7 +35,7 @@ int start_x, start_y;
 * 3. 끝점: 모든 저글링을 방문
 * 4. 방문 표시: visited 없이, graph 값을 방문하면서 해당 칸 도달까지 걸린 시간을 기록
 * 5. BFS를 한번 실행
-* 6. 큐의 크기: 100 * 100 + 1
+* 6. 큐의 크기: 100 * 100 + 1 (102 * 102 + 1)
 */
 
 int input_data() {
@@ -83,7 +83,8 @@ result BFS() {
 			int new_x = curr.x + move[move_idx].x;
 			int new_y = curr.y + move[move_idx].y;
 
-			if (new_x > C || new_x <= 0 || new_y > R || new_y <= 0 || graph[new_y][new_x] != 1)
+			// new_x > C || new_x <= 0 || new_y > R || new_y <= 0 ||  => MAX_X_Y를 102로 설정, 테두리 값은 0으로 초기화되므로 경계 체크 없이 방문 안함
+			if (graph[new_y][new_x] != 1)
 				continue;
 
 			Queue[rear++] = (coordinate){ new_x, new_y };
