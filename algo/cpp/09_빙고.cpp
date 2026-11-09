@@ -7,6 +7,8 @@
 #include <cstdint> // INT32_MIN
 
 #define R_C 5
+#define required_cell 5
+#define required_line 3
 
 using namespace::std;
 
@@ -65,24 +67,24 @@ int main(void) {
             //print_data(row_count, R_C + 1);
             //print_data(col_count, R_C + 1);
 
-            if (diag_increase[r + c] >= R_C) {
+            if (diag_increase[r + c] >= required_cell) {
                 line_count++;
                 diag_increase[r + c] = INT32_MIN;
             }
-            if (diag_decrease[R_C + r - c] >= R_C) {
+            if (diag_decrease[R_C + r - c] >= required_cell) {
                 line_count++;
                 diag_decrease[R_C + r - c] = INT32_MIN;
             }
-            if (row_count[r] >= R_C) {
+            if (row_count[r] >= required_cell) {
                 line_count++;
                 row_count[r] = INT32_MIN;
             }
-            if (col_count[c] >= R_C) {
+            if (col_count[c] >= required_cell) {
                 line_count++;
                 col_count[c] = INT32_MIN;
             }
 
-            if (line_count >= 3) {
+            if (line_count >= required_line) {
                 cout << R_C * i + j + 1;
                 return 0;
             }
