@@ -1,3 +1,5 @@
+#if 0
+
 #include "Person.h"
 
 int main()
@@ -14,3 +16,5 @@ int main()
 	service.del();
 	service.printAll();
 }
+
+#endif
