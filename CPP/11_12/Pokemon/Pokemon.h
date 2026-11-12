@@ -12,7 +12,7 @@ private:
     int exp;
 public:
     Pokemon(string name, int level, int hp, double exp);
-    virtual ~Pokemon() { }
+    virtual ~Pokemon() { } // NOTE: new를 통해 객체를 생성하기 때문에 부모 클래스 소멸자를 virtual로 정의해야 함
     bool isDead() { return hp <= 0; }
     void eat();
     void sleep();
