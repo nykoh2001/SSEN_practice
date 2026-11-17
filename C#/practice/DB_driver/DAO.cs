@@ -1,7 +1,7 @@
 class DAO
 {
-  DB db;
-  public DAO(DB db)
+  private DB db;
+  public DAO(DB db) // Dependency Injection
   {
     this.db = db;
   }
