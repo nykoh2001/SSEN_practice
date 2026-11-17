@@ -8,7 +8,6 @@ foreach(object obj in objs)
   Console.WriteLine(obj.GetType().Name + ":" + obj);
 }
 
-#endif
 
 Person p1 = new("aaa", 12);
 Person p2 = new("aaa", 12);
@@ -23,3 +22,5 @@ Console.WriteLine(p1.Equals(p3));
 Console.WriteLine(p1.GetHashCode());
 Console.WriteLine(p2.GetHashCode());
 Console.WriteLine(p3.GetHashCode());
+
+#endif
