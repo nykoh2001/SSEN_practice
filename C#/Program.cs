@@ -1,5 +1,7 @@
 ﻿using C_;
 
+#if false
+
 // 최상위 문, main 함수(entrypoint) 내용
 
 Class1 c1 = new Class1{ // default constructor 호출 -> 값 대입
@@ -30,3 +32,8 @@ for (int i = 0; i < 3; i++)
 {
   people[i].print();
 }
+
+#endif
+
+Action action = new Action(new MyInterfaceImpl());
+action.call();
