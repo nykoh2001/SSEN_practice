@@ -11,21 +11,22 @@ public class Box<T>
 
 public class Add<T> where T : INumber<T>
 {
-  private T data1, data2;
+  public T Data1 { set; get; }
+  public T Data2 { set; get; }
 
   public Add(T data1, T data2)
   {
-    this.data1 = data1;
-    this.data2 = data2;
+    Data1 = data1;
+    Data2 = data2;
   }
 
   public T add()
   {
-    return data1 + data2;
+    return Data1 + Data2;
   }
 
   public override string ToString()
   {
-    return data1 + " + " + data2 + " = " + add();
+    return Data1 + " + " + Data2 + " = " + add();
   }
 }
