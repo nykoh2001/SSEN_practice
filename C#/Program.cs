@@ -33,7 +33,8 @@ for (int i = 0; i < 3; i++)
   people[i].print();
 }
 
-#endif
 
 Action action = new Action(new MyInterfaceImpl());
 action.call();
+
+#endif
